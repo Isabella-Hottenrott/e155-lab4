@@ -11,6 +11,9 @@ Purpose : Generic application start
 */
 
 #include <stdio.h>
+#include "STM32L432KC_RCC.h"
+#include "STM32L432KC_GPIO.h"
+#include "STM32L432KC_FLASH.h"
 
 /*********************************************************************
 *
@@ -23,7 +26,7 @@ Purpose : Generic application start
 // Fur Elise, E155 Lab 4
 // Updated Fall 2024
 
-
+// 40,000,000 / (prescaler + 1)(autoreload + 1) = f
 
 // Pitch in Hz, duration in ms
 const int notes[][2] = {
@@ -140,7 +143,45 @@ const int notes[][2] = {
 
 
 int main(void) {
-	
-	
+
+    // Configure flash to add waitstates to avoid timing errors
+    configureFlash();
+
+    // Setup the PLL and switch clock source to the PLL
+    configureClock();
+
+    // Turn on clock to TIM15 and 16
+    // bits 17 and 16 of register
+    RCC->APB2EN |= (0b11 << 16);
+
+    // Turn on clock to GPIOA
+    RCC->AHB2ENR |= (1);
+    //Set speaker as alt fn on pin 3
+    pinMode(2, GPIO_ALT);
+    setAF(2);
+
+    configTIM(15);
+    configTIM(16);
+
+    for (int i = 0; ; i++) {
+        int hz = notes[i][0];
+        int ms = notes[i][1];
+
+        if (ms == 0) {
+            break;
+        } else {
+            set_hz(15, hz);
+        }
+        delay_millis(16, ms);
+    }
+
+    while (1) {
+    }
+
 }
+
+    //GPIO debug:
+    // int digitalRead(int pin);
+
+
 /*************************** End of file ****************************/

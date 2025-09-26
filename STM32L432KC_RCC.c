@@ -51,3 +51,4 @@ void configureClock(){
     while(!((RCC->CFGR >> 2) & 0b11));
 }
 
+

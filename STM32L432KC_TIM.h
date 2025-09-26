@@ -6,39 +6,41 @@
 
 #include <stdint.h>
 
-///////////////////////////////////////////////////////////////////////////////
-// Definitions
-///////////////////////////////////////////////////////////////////////////////
-#define TIM2_BASE     (0x40000000UL)
+
+#define TIM15_BASE     (0x40014000UL)
+#define TIM16_BASE     (0x40014400UL)
 #define __IO volatile
 
 Need CR1, SR, EGR, ARR
 egr - how to reset
 arr- comparison value
 typedef struct {
-    __IO uint32_t CR1;        // 0x00
-    uint32_t      RESERVED3; // 0x04 
-    __IO uint32_t SMCR;        // 0x08
-    uint32_t 
-    __IO uint32_t SR;         // 0x10 -> doesnt seemlikeill need
-    __IO uint32_t EGR;        // 0x14 why do i need this (UG. reinitialize the counter. how to kick off thecount)
-    __IO uint32_t CCMR1;      // 0x18 why do I need this
-    uint32_t      RESERVED4;  // 0x1C why do I need this
-    __IO uint32_t CCER;       // 0x20 why do Ineed this
-    __IO uint32_t CNT;        // 0x24
-    __IO uint32_t PSC;        // 0x28 
-    __IO uint32_t ARR;        // 0x2C
-    uint32_t      RESERVED5;  // 0x30 
-    __IO uint32_t CCR1;       // 0x34
-} TIM2_TypeDef;
-#define TIM2 ((TIM2_TypeDef*)TIM2_BASE)
+    __IO uint32_t CR1;        // 00
+    uint32_t      RESERVED; // 04 
+    __IO uint32_t SMCR;        // 08 why do I need
+    uint32_t      RESERVEDi;   // 
+    __IO uint32_t SR;         // 10
+    __IO uint32_t EGR;        // 0x14 How to restart
+    __IO uint32_t CCMR1;      // 0x18 capture and compare mode. DONT need?
+    uint32_t      RESERVEDii;;  // 0x1C 
+    __IO uint32_t CCER;       // 0x20 capture and compare enable. DONT need?
+    __IO uint32_t CNT;        // 0x24 dont need?
+    __IO uint32_t PSC;        // 0x28  dont need?
+    __IO uint32_t ARR;        // 0x2C autoreload
+    uint32_t      RESERVEDiii;  // 0x30 
+    __IO uint32_t CCR1;       // 0x34 dont need?
+} TIMx_TypeDef;
 
-use timers to generate square waves of a given frequency
-configure clocks in RCC
-Turn on clock to timer in RCC
-Select correct clock source in TIM control (disable slave mode)
-Configure counter
-Prescalerreg
-autoreload reg
-enable counter CEN
+#define TIM15 ((TIM15_TypeDef*)TIM15_BASE)
+#define TIM16 ((TIM16_TypeDef*)TIM16_BASE)
+
+
+
+// function prototypes
+void configTIM(int TIMx);
+void delay_millis(int TIMx, uint32_t ms);
+void set_hz(int TIMx, uint32_t freq);
+
+
+#endif
 
