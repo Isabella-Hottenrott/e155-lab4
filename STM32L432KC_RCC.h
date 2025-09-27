@@ -1,8 +1,8 @@
 // STM32L432KC_RCC.h
 // Header for RCC functions
 
-#ifndef STM32L4_RCC_H
-#define STM32L4_RCC_H
+#ifndef STM32L432KC_RCC_H
+#define STM32L432KC_RCC_H
 
 #include <stdint.h>
 
@@ -14,7 +14,7 @@
 
 // Base addresses
 #define RCC_BASE (0x40021000UL) // base address of RCC
-#define GPIOA_BASE    (0x48000000UL)
+#define GPIOA_BASE (0x48000000UL)
 
 // PLL
 #define PLLSRC_HSI 0

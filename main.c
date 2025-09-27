@@ -14,6 +14,7 @@ Purpose : Generic application start
 #include "STM32L432KC_RCC.h"
 #include "STM32L432KC_GPIO.h"
 #include "STM32L432KC_FLASH.h"
+#include "STM32L432KC_TIM.h"
 
 /*********************************************************************
 *
@@ -152,10 +153,11 @@ int main(void) {
 
     // Turn on clock to TIM15 and 16
     // bits 17 and 16 of register
-    RCC->APB2EN |= (0b11 << 16);
+    RCC->APB2ENR |= (0b11 << 16);
 
     // Turn on clock to GPIOA
     RCC->AHB2ENR |= (1);
+    
     //Set speaker as alt fn on pin 3
     pinMode(2, GPIO_ALT);
     setAF(2);
@@ -164,7 +166,7 @@ int main(void) {
     configTIM(16);
 
     for (int i = 0; ; i++) {
-        int hz = notes[i][0];
+        int hz = notes[i][2];
         int ms = notes[i][1];
 
         if (ms == 0) {
@@ -173,6 +175,8 @@ int main(void) {
             set_hz(15, hz);
         }
         delay_millis(16, ms);
+        printf("%d, frq", hz);
+        printf("%d, tim", ms);
     }
 
     while (1) {
