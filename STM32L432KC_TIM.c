@@ -33,6 +33,7 @@ void set_hz(TIMx_TypeDef * TIMx, uint32_t freq){
     uint32_t autoreload = (uint32_t) ((SystemCoreClock/(2 * freq * 3))-1);
     TIMx->PSC = (uint32_t) 2;
     TIMx->ARR = autoreload; // set timer max count
+    TIMx->CCMR &= ~(0b11); // set capture compare mode reg to output
     TIMx->EGR |= 1; // force update
     TIMx->SR &= ~(0x1); // clear UIF
     TIMx->CNT = 0; // reset count

@@ -178,6 +178,8 @@ int main(void) {
         delay_millis(TIM16, ms);
         printf("%d, frq", hz);
         printf("%d, tim", ms);
+        // is this sufficient- using the C as an interface? Or do I need to do more work in the registers
+        // with ARR and communication between peripherals?
     }
 
     while (1) {
