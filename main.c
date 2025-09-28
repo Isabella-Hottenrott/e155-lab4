@@ -160,8 +160,7 @@ int main(void) {
     RCC->AHB2ENR |= (1);
     
     //Set speaker as alt fn on pin 3
-    pinMode(2, GPIO_ALT);
-    setAF(2);
+    pinMode(2, GPIO_OUTPUT);
 
     configTIM(TIM15);
     configTIM(TIM16);
@@ -175,11 +174,29 @@ int main(void) {
         } else {
             set_hz(TIM15, hz);
         }
-        delay_millis(TIM16, ms);
-        printf("%d, frq", hz);
-        printf("%d, tim", ms);
-        // is this sufficient- using the C as an interface? Or do I need to do more work in the registers
-        // with ARR and communication between peripherals?
+        config_delay(TIM16, ms);
+        
+        printf("frq = %d \n", hz);
+        int hz_arr = TIM15->ARR;
+        printf("Hz arr = %d \n", hz_arr);
+        
+
+        printf("tim = %d \n", ms);
+        int ms_arr = TIM16->ARR;
+        printf("ms arr = %d \n", ms_arr);
+
+
+        while(!(TIM16->SR & 1)){
+            int gpio_out = (TIM15->SR)&0b1;
+            printf("gpio = %d \n", gpio_out);
+            digitalWrite(2, gpio_out);
+
+            }
+        printf("gpio done, next \n");
+
+      //  TIM16->SR &= ~(0x1);
+
+  
     }
 
     while (1) {

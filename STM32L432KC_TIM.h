@@ -38,7 +38,7 @@ typedef struct {
 
 // function prototypes
 void configTIM(TIMx_TypeDef * TIMx);
-void delay_millis(TIMx_TypeDef * TIMx, uint32_t ms);
+void config_delay(TIMx_TypeDef * TIMx, uint32_t ms);
 void set_hz(TIMx_TypeDef * TIMx, uint32_t freq);
 
 

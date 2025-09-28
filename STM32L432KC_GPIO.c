@@ -31,7 +31,6 @@ void digitalWrite(int pin, int val) {
 }
 
 void togglePin(int pin) {
-    // Use XOR to toggle
     GPIO->ODR ^= (1 << pin);
 }
 
@@ -52,10 +51,3 @@ void setAF(int pin){
     GPIO->AFRL &= ~(0b1 << 4*pin);
 
 }
-
-
-
-    // select output speed via GPIOx_OSPEEDER
-    // schmitt trigger input is activated
-    // Data present onthe I/O pin are sampled into the input data register every AHB clock cycle
-    // A read access to the input data register gets the I/O state
