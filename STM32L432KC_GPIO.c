@@ -38,7 +38,7 @@ void togglePin(int pin) {
 // setting PAF14, TIM15_CH1, PA2, EVENTOUT
 
 void setAF(int pin){
-   // GPIO->OTYPER &= ~(0b1 << pin);
+    GPIO->OTYPER &= ~(0b1 << pin);
     // set to output push-pull ?
 
    // GPIO->PURPDR &= ~(0b1 << 2*pin);
@@ -52,7 +52,6 @@ void setAF(int pin){
     GPIO->AFRL &= ~(0b1 << 4*pin);
 
 }
-
 
 
 

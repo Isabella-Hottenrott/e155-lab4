@@ -16,18 +16,18 @@
 
 typedef struct {
     __IO uint32_t CR1;        // 00
-    uint32_t      RESERVED; // 04 
+    uint32_t      RESERVED6; // 04 
     __IO uint32_t SMCR;        // 08 why do I need
-    uint32_t      RESERVEDi;   // 
+    uint32_t      RESERVED7;   // 
     __IO uint32_t SR;         // 10
     __IO uint32_t EGR;        // 0x14 How to restart
     __IO uint32_t CCMR1;      // 0x18 capture and compare mode. DONT need?
-    uint32_t      RESERVEDii;;  // 0x1C 
+    uint32_t      RESERVED8;  // 0x1C 
     __IO uint32_t CCER;       // 0x20 capture and compare enable. DONT need?
     __IO uint32_t CNT;        // 0x24 dont need?
     __IO uint32_t PSC;        // 0x28  dont need?
     __IO uint32_t ARR;        // 0x2C autoreload
-    uint32_t      RESERVEDiii;  // 0x30 
+    uint32_t      RESERVED9;  // 0x30 
     __IO uint32_t CCR1;       // 0x34 dont need?
 } TIMx_TypeDef;
 

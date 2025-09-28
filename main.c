@@ -153,7 +153,8 @@ int main(void) {
 
     // Turn on clock to TIM15 and 16
     // bits 17 and 16 of register
-    RCC->APB2ENR |= (0b11 << 16);
+    RCC->APB2ENR |= (1 << 16);
+    RCC->APB2ENR |= (1 << 17);
 
     // Turn on clock to GPIOA
     RCC->AHB2ENR |= (1);
@@ -162,8 +163,8 @@ int main(void) {
     pinMode(2, GPIO_ALT);
     setAF(2);
 
-    configTIM(15);
-    configTIM(16);
+    configTIM(TIM15);
+    configTIM(TIM16);
 
     for (int i = 0; ; i++) {
         int hz = notes[i][2];
@@ -172,9 +173,9 @@ int main(void) {
         if (ms == 0) {
             break;
         } else {
-            set_hz(15, hz);
+            set_hz(TIM15, hz);
         }
-        delay_millis(16, ms);
+        delay_millis(TIM16, ms);
         printf("%d, frq", hz);
         printf("%d, tim", ms);
     }

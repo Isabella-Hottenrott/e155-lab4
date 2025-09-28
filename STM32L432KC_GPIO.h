@@ -22,6 +22,7 @@
 #define GPIO_OUTPUT 1
 #define GPIO_ALT    2
 #define GPIO_ANALOG 3
+#define __IO volatile
 
 ///////////////////////////////////////////////////////////////////////////////
 // Bitfield struct for GPIO
