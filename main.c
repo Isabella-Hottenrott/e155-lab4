@@ -188,7 +188,6 @@ int main(void) {
 
         while(!(TIM16->SR & 1)){
             int gpio_out = (TIM15->SR)&0b1;
-            printf("gpio = %d \n", gpio_out);
             digitalWrite(2, gpio_out);
 
             }
