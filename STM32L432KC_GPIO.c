@@ -31,23 +31,6 @@ void digitalWrite(int pin, int val) {
 }
 
 void togglePin(int pin) {
+    // Use XOR to toggle
     GPIO->ODR ^= (1 << pin);
-}
-
-// setting PAF14, TIM15_CH1, PA2, EVENTOUT
-
-void setAF(int pin){
-    GPIO->OTYPER &= ~(0b1 << pin);
-    // set to output push-pull ?
-
-   // GPIO->PURPDR &= ~(0b1 << 2*pin);
-   // GPIO->PURPDR |= (0b1 << (2*pin+1));
-    // set to output pull down
-
-    // set to PA2, PAF14
-    GPIO->AFRL |= (0b1 << (4*pin+3));
-    GPIO->AFRL |= (0b1 << (4*pin+2));
-    GPIO->AFRL |= (0b1 << (4*pin+1));
-    GPIO->AFRL &= ~(0b1 << 4*pin);
-
 }
