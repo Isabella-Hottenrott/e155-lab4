@@ -16,6 +16,7 @@
 
 // Base addresses for GPIO ports
 #define GPIOB_BASE  (0x48000400UL)
+#define __IO volatile
 
 // Arbitrary GPIO functions for pinMode()
 #define GPIO_INPUT  0
@@ -29,16 +30,16 @@
 
 // GPIO register structs here
 typedef struct {
-    volatile uint32_t MODER;   // GPIO Offset 0x00 GPIO port mode register
-    volatile uint32_t OTYPER;  // GPIO Offset 0x04
-    volatile uint32_t OSPEEDR; // GPIO Offset 0x08
-    volatile uint32_t PURPDR;  // GPIO Offset 0x0C
-    volatile uint32_t IDR;     // GPIO Offset 0x10
-    volatile uint32_t ODR;     // GPIO Offset 0x14
-    volatile uint32_t BSRR;    // GPIO Offset 0x18
-    volatile uint32_t LCKR;    // GPIO Offset 0x1C
-    volatile uint32_t AFRL;    // GPIO Offset 0x20
-    volatile uint32_t AFRH;    // GPIO Offset 0x24
+    __IO uint32_t MODER;   // GPIO Offset 0x00 GPIO port mode register
+    __IO uint32_t OTYPER;  // GPIO Offset 0x04
+    __IO uint32_t OSPEEDR; // GPIO Offset 0x08
+    __IO uint32_t PURPDR;  // GPIO Offset 0x0C
+    __IO uint32_t IDR;     // GPIO Offset 0x10
+    __IO uint32_t ODR;     // GPIO Offset 0x14
+    __IO uint32_t BSRR;    // GPIO Offset 0x18
+    __IO uint32_t LCKR;    // GPIO Offset 0x1C
+    __IO uint32_t AFRL;    // GPIO Offset 0x20
+    __IO uint32_t AFRH;    // GPIO Offset 0x24
 } GPIO;
 
 // Pointers to GPIO-sized chunks of memory for each peripheral

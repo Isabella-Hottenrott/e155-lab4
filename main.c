@@ -157,14 +157,14 @@ int main(void) {
     RCC->APB2ENR |= (1 << 16);
     RCC->APB2ENR |= (1 << 17);
 
-    // Turn on clock to GPIOA
-    RCC->AHB2ENR |= (1);
+    // Turn on clock to GPIOB
+    RCC->AHB2ENR |= (1 << 1);
     
-    //Set speaker as alt fn on pin 3
-    pinMode(3, GPIO_OUTPUT);
 
+    pinMode(6, GPIO_OUTPUT);
+    
 
-    for (int i = 0; ; i++) {
+    for (int i = 0; i<=109; i++) {
         int hz = notes[i][2];
         int ms = notes[i][1];
 
@@ -174,29 +174,20 @@ int main(void) {
             set_hz(hz);
         }
         config_delay(ms);
-        
-        printf("frq = %d \n", hz);
-        int hz_arr = TIM15->ARR;
-        printf("Hz arr = %d \n", hz_arr);
-        
 
-        printf("tim = %d \n", ms);
-        int ms_arr = TIM16->ARR;
-        printf("ms arr = %d \n", ms_arr);
-
-
-        while(!(TIM16->SR & 1)){
-            int gpio_out = (TIM15->SR)&0b1;
-            digitalWrite(2, gpio_out);
-
+        while(!((TIM16->SR) & 0b1)){
+            if ((TIM15->SR)&0b1) {
+              TIM15->SR &= ~(0b1);
+              togglePin(6);
             }
-        printf("gpio done, next \n");
 
-      //  TIM16->SR &= ~(0x1);
+        }
+
+
 
   
     }
-
+    digitalWrite(6, 0);
     while (1) {
     }
 

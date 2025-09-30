@@ -16,7 +16,7 @@ typedef struct {
     __IO uint32_t CR1;        // 00
     __IO uint32_t CR2;        // 04 
     __IO uint32_t SMCR;        // 08 why do I need
-    __IO uint32_t DIER;   // 
+    __IO uint32_t DIER;       //  0C
     __IO uint32_t SR;         // 10
     __IO uint32_t EGR;        // 0x14 How to restart
     __IO uint32_t CCMR1;      // 0x18 capture and compare mode, 0x1C
@@ -29,7 +29,7 @@ typedef struct {
     __IO uint32_t CCR1;       // 0x34 dont need?
 } TIM15_TypeDef;
 
-#define TIM15 ((TIM15_TypeDef*)TIM15_BASE)
+#define TIM15 ((TIM15_TypeDef *) TIM15_BASE)
 
 
 
