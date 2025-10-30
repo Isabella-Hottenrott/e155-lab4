@@ -38,8 +38,6 @@ typedef struct {
 
 #define TIM16 ((TIM16_TypeDef *) TIM16_BASE)
 
-
-
 // function prototypes
 void config_delay(int ms);
 

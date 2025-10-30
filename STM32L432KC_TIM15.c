@@ -12,14 +12,13 @@
 void set_hz(int freq){
     int autoreload;
     if (freq == 0){
-      autoreload = 0;
+      autoreload = 0; // arr=0 if frequency = 0
     } else {
       autoreload = (int) ((SystemCoreClock/((2*(pscale_val)) * freq)));
     }
     TIM15->PSC = (int) pscale_val - 1;
     TIM15->EGR |= 1; // force update
-    TIM15->CR1 |= 1;
-
+    TIM15->CR1 |= 1; // enable timer
     TIM15->ARR = autoreload; // set timer max count
     TIM15->EGR |= 1; // force update
     TIM15->SR &= ~(0x1); // clear UIF

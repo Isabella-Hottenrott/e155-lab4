@@ -142,7 +142,7 @@ const int notes[][2] = {
 {440,	500},
 {  0,	0}};
 
-
+int length = sizeof(notes) / sizeof(notes[0]);
 
 int main(void) {
 
@@ -160,41 +160,34 @@ int main(void) {
     // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
     
-
+    // Set GPIO B6 to Output
     pinMode(6, GPIO_OUTPUT);
     
 
-    for (int i = 0; i<=109; i++) {
+    for (int i = 0; i<=length; i++) {
         int hz = notes[i][2];
         int ms = notes[i][1];
 
         if (ms == 0) {
-            break;
+            break; // end if ms == 0
         } else {
             set_hz(hz);
         }
         config_delay(ms);
 
-        while(!((TIM16->SR) & 0b1)){
+        while(!((TIM16->SR) & 0b1)){ // while ms timer is still running
             if ((TIM15->SR)&0b1) {
-              TIM15->SR &= ~(0b1);
+              TIM15->SR &= ~(0b1);  // toggle if freq clock toggles
               togglePin(6);
             }
-
         }
-
-
-
-  
     }
-    digitalWrite(6, 0);
+    
+    digitalWrite(6, 0); // end once all the notes have been played
     while (1) {
     }
-
 }
 
-    //GPIO debug:
-    // int digitalRead(int pin);
 
 
 /*************************** End of file ****************************/
