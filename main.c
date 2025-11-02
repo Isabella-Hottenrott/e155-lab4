@@ -25,12 +25,13 @@ Purpose : Generic application start
 *   Application entry point.
 */
 // lab4_starter.c
+//Isabella Hottenrott
 // Fur Elise, E155 Lab 4
 // Updated Fall 2024
 
-// 40,000,000 / (prescaler + 1)(autoreload + 1) = f
 
 // Pitch in Hz, duration in ms
+
 const int notes[][2] = {
 {659,	125},
 {623,	125},
@@ -140,11 +141,17 @@ const int notes[][2] = {
 {523,	125},
 {494,	125},
 {440,	500},
-{  0,	0}};
+{  0,	0}
+};
+
 
 int length = sizeof(notes) / sizeof(notes[0]);
 
+
+
 int main(void) {
+
+
 
     // Configure flash to add waitstates to avoid timing errors
     configureFlash();
@@ -160,32 +167,34 @@ int main(void) {
     // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
     
-    // Set GPIO B6 to Output
+
     pinMode(6, GPIO_OUTPUT);
     
 
-    for (int i = 0; i<=length; i++) {
-        int hz = notes[i][2];
+    for (int i = 0; i<=length-1; i++) {
+        int hz = notes[i][0];
         int ms = notes[i][1];
 
-        if (ms == 0) {
-            break; // end if ms == 0
-        } else {
-            set_hz(hz);
-        }
-        config_delay(ms);
+        set_hz(hz);
 
-        while(!((TIM16->SR) & 0b1)){ // while ms timer is still running
-            if ((TIM15->SR)&0b1) {
-              TIM15->SR &= ~(0b1);  // toggle if freq clock toggles
-              togglePin(6);
-            }
+        config_delay();
+        printf("done %d\n", i);
+        
+        for(int i = 0; i<ms; i++){
+        TIM16->SR &= ~0b1;
+          while(!((TIM16->SR) & 0b1)){
+              if ((TIM15->SR)&0b1) {
+                TIM15->SR &= ~(0b1); // clear UIF
+                togglePin(6);
+              }
+          }
         }
-    }
-    
-    digitalWrite(6, 0); // end once all the notes have been played
-    while (1) {
-    }
+
+        }
+      
+      
+    while (1) {}
+
 }
 
 

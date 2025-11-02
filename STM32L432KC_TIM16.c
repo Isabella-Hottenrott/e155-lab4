@@ -1,4 +1,7 @@
 // STM32L432KC_TIM.c
+//Isabella Hottenrott
+// ihottenrott@g.hmc.edu
+// 2/10/2025
 // Source code for TIM functions
 
 #include "STM32L432KC_TIM16.h"
@@ -8,14 +11,22 @@
 
 
 
-void config_delay(int ms){
-    int psc_div = (int) 1000;
-    TIM16->PSC = (psc_div-1);
-    TIM16->EGR |= 1; // force update
-    TIM16->CR1 |= (1); //enable timer
-    TIM16->ARR = (SystemCoreClock*ms)/(2*psc_div); // set timer max count
-    TIM16->EGR |= 1; // force update
+void config_delay(){
+    TIM16->CR1 &= ~0b1; // disable for config
+    TIM16->CR1 &= ~(0b1<<7); //No auto reload
+    TIM16->DIER &= ~(0b1);  //Turn off update interrupt
+    TIM16->CR1 &= ~(0b1<<1); // update events generated
+
+    TIM16->PSC &= ~(0b1111111111111111);
+    TIM16->PSC |= 0b11111001111;
+
+    TIM16->ARR &= ~(0b1111111111111111);
+    TIM16->ARR |= 0b0000000000010011;
+    TIM16->CNT &= ~(0b1111111111111111); // reset count
+
     TIM16->SR &= ~(0b1); // clear UIF
-    TIM16->CNT = 0; // reset count
+
+    TIM16->CR1 |= (0b1);
+    TIM16->EGR |= 0b1; // force update
 }
 

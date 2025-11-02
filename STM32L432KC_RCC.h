@@ -1,4 +1,7 @@
 // STM32L432KC_RCC.h
+//Isabella Hottenrott
+// ihottenrott@g.hmc.edu
+// 2/10/2025
 // Header for RCC functions
 
 #ifndef STM32L432KC_RCC_H

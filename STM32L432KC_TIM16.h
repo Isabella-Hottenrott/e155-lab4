@@ -1,4 +1,7 @@
 // STM32L432KC_TIM.h
+//Isabella Hottenrott
+// ihottenrott@g.hmc.edu
+// 2/10/2025
 // Header for TIM functions
 
 #ifndef STM32L432KC_TIM16_H
@@ -38,8 +41,10 @@ typedef struct {
 
 #define TIM16 ((TIM16_TypeDef *) TIM16_BASE)
 
+
+
 // function prototypes
-void config_delay(int ms);
+void config_delay();
 
 
 #endif

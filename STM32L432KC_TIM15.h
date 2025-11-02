@@ -1,4 +1,7 @@
 // STM32L432KC_TIM.h
+//Isabella Hottenrott
+// ihottenrott@g.hmc.edu
+// 2/10/2025
 // Header for TIM functions
 
 #ifndef STM32L432KC_TIM15_H
@@ -25,7 +28,7 @@ typedef struct {
     __IO uint32_t CNT;        // 0x24 dont need?
     __IO uint32_t PSC;        // 0x28  dont need?
     __IO uint32_t ARR;        // 0x2C autoreload
-    __IO uint32_t RCR;  // 0x30 
+    __IO uint32_t RCR;        // 0x30 
     __IO uint32_t CCR1;       // 0x34 dont need?
 } TIM15_TypeDef;
 
