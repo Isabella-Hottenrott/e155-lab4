@@ -2,7 +2,7 @@
 //Isabella Hottenrott
 // ihottenrott@g.hmc.edu
 // 2/10/2025
-// Source code for RCC functions
+// Code for RCC functions
 
 #include "STM32L432KC_RCC.h"
 

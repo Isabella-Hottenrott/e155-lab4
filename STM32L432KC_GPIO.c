@@ -2,7 +2,7 @@
 //Isabella Hottenrott
 // ihottenrott@g.hmc.edu
 // 2/10/2025
-// Source code for GPIO functions
+// Code for GPIO functions
 
 #include "STM32L432KC_GPIO.h"
 

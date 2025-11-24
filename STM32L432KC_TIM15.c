@@ -8,7 +8,7 @@
 
 
 #define SystemCoreClock 8e7
-#define pscale_val 20
+#define pscale_val 20 //choose prescaler = 20
 
 
 
